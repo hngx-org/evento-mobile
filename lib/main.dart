@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/routes.dart';
 import 'ui/theme/theme.dart';
 
@@ -26,12 +27,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      theme: LightTheme,
-      darkTheme: DarkTheme,
-      routerConfig: routes,
-      themeMode: ThemeMode.light,
-    );
+    return ScreenUtilInit(
+        designSize: MediaQuery.of(context).size,
+        minTextAdapt: true,
+        builder: (context, child) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: LightTheme,
+            darkTheme: DarkTheme,
+            routerConfig: routes,
+            themeMode: ThemeMode.light,
+          );
+        });
   }
 }

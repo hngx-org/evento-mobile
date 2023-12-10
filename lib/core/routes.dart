@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../ui/screens/splash_screen.dart';
+import '../ui/screens/onboarding/splash_screen.dart';
 
 final routes = GoRouter(
   initialLocation: SplashScreen.path,
