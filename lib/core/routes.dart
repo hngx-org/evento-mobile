@@ -1,3 +1,4 @@
+import 'package:evento/ui/screens/auth/login_screen.dart';
 import 'package:evento/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -18,6 +19,14 @@ final routes = GoRouter(
       path: OnboardingScreen.path,
       pageBuilder: (BuildContext context, GoRouterState state) => CupertinoPage(
         child: const OnboardingScreen(),
+        key: state.pageKey,
+      ),
+    ),
+    GoRoute(
+      name: LoginScreen.name,
+      path: LoginScreen.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => CupertinoPage(
+        child: const LoginScreen(),
         key: state.pageKey,
       ),
     ),
