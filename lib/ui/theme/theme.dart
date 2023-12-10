@@ -28,17 +28,17 @@ final ThemeData LightTheme = ThemeData(
   primaryColor: Color(0xFFE0580C),
   brightness: Brightness.light,
   textTheme: TextTheme(
-    displayLarge: GoogleFonts.nunito(
+    displayLarge: GoogleFonts.montserrat(
       color: Color(0xFF3C3C3C),
       fontSize: 24,
       fontWeight: FontWeight.w700,
     ),
-    displayMedium: GoogleFonts.nunito(
+    displayMedium: GoogleFonts.montserrat(
       color: Color(0xFF3C3C3C),
       fontSize: 20,
       fontWeight: FontWeight.w700,
     ),
-    displaySmall: GoogleFonts.nunito(
+    displaySmall: GoogleFonts.montserrat(
       color: Color(0xFF3C3C3C),
       fontSize: 18,
       fontWeight: FontWeight.w700,
