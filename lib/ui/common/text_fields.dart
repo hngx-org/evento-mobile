@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EventoTextField extends StatelessWidget {
   final TextEditingController? textEditingController;
@@ -65,14 +66,13 @@ class EventoTextField extends StatelessWidget {
         hintText: hint,
         prefixText: prefixText,
         focusedBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-          borderSide: BorderSide(
-            color: Theme.of(context).primaryColor,
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(8.r)),
+          borderSide:
+              BorderSide(color: Theme.of(context).primaryColor, width: 1.w),
         ),
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-        ),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.r)),
+            borderSide: BorderSide(width: 1.w)),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
         hintStyle: Theme.of(context)
