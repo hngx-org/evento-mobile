@@ -92,42 +92,46 @@ class OnboardingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 70),
       color: Colors.white,
       width: MediaQuery.sizeOf(context).width,
       height: MediaQuery.sizeOf(context).height,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            svgImage,
-            width: 300.w,
+          Container(
+            alignment: Alignment.center,
+            height: MediaQuery.sizeOf(context).height / 4,
+            child: SvgPicture.asset(
+              svgImage,
+            ),
           ),
           SizedBox(
             height: 100.h,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Flexible(
                 child: Text(
                   headerText,
-                  textAlign: TextAlign.left,
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
             ],
           ),
           SizedBox(
-            height: 15.h,
+            height: 25.h,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Flexible(
                 child: Text(
                   bodyText,
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
