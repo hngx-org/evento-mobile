@@ -70,6 +70,12 @@ class EventoTextField extends StatelessWidget {
           borderSide:
               BorderSide(color: Theme.of(context).primaryColor, width: 1.w),
         ),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.r)),
+            borderSide: BorderSide(
+              width: 1.w,
+              color: const Color(0xFFB1B1B1),
+            )),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.r)),
             borderSide: BorderSide(width: 1.w)),
