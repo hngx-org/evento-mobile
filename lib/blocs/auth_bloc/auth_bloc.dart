@@ -58,6 +58,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               });
         }
       }
+      if (event is ForgotPasswordEvent) {
+        emit(ForgotPasswordLoading());
+
+        try {
+          final authRepository = AuthRepository();
+          await authRepository.forgotPassword(event.email);
+
+          emit(const ForgotPasswordSuccess(
+              'Password reset link sent Successfully'));
+        } on AuthServiceException catch (e) {
+          emit(ForgotPasswordFailed(error: e.message));
+        } on AuthRepositoryException catch (e) {
+          emit(ForgotPasswordFailed(error: e.message));
+        } catch (e) {
+          handleException(
+              e: e,
+              action: (message) {
+                emit(ForgotPasswordFailed(error: message));
+              });
+        }
+      }
     });
   }
 }

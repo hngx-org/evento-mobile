@@ -24,13 +24,26 @@ final routes = GoRouter(
       ),
     ),
     GoRoute(
-      name: LoginScreen.name,
-      path: LoginScreen.path,
-      pageBuilder: (BuildContext context, GoRouterState state) => CupertinoPage(
-        child: const LoginScreen(),
-        key: state.pageKey,
-      ),
-    ),
+        name: LoginScreen.name,
+        path: LoginScreen.path,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          if (state.uri.queryParameters.isNotEmpty) {
+            Map<String, dynamic> args = state.uri.queryParameters;
+            return CupertinoPage<void>(
+              child: LoginScreen(
+                token: args['token'],
+              ),
+              key: state.pageKey,
+            );
+          } else {
+            return CupertinoPage<void>(
+              child: const LoginScreen(
+                token: null,
+              ),
+              key: state.pageKey,
+            );
+          }
+        }),
     GoRoute(
       name: SignUpScreen.name,
       path: SignUpScreen.path,

@@ -14,9 +14,12 @@ import 'package:go_router/go_router.dart';
 import '../../../blocs/auth_bloc/auth_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
-  static const String name = 'login-screen';
-  static const String path = '/login-screen';
-  const LoginScreen({super.key});
+  static const String name2 = 'login-screen';
+  static const String name = 'reset-password-screen';
+  static const String path = '/reset-password/confirm';
+  static const String path2 = '/login-screen';
+  final String? token;
+  const LoginScreen({super.key, this.token});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -30,6 +33,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    print(widget.token);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,183 +185,166 @@ class _LoginScreenState extends State<LoginScreen> {
                                   SizedBox(
                                     height: 25.h,
                                   ),
-                                  SingleChildScrollView(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Email',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge
-                                              ?.copyWith(
-                                                  fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          height: 5.h,
-                                        ),
-                                        EventoTextField(
-                                          hint: 'Enter email',
-                                          textEditingController:
-                                              _emailController,
-                                          enabled: state is! LoginLoading,
-                                          keyboardType:
-                                              TextInputType.emailAddress,
-                                          textInputAction: TextInputAction.next,
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Required field';
-                                            } else if (!isEmailValid(value)) {
-                                              return 'Incorrect Email Address';
-                                            }
-                                            return null;
-                                          },
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
-                                        ),
-                                        SizedBox(
-                                          height: 20.h,
-                                        ),
-                                        Text(
-                                          'Password',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge
-                                              ?.copyWith(
-                                                  fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          height: 5.h,
-                                        ),
-                                        EventoTextField(
-                                          hint: 'Password',
-                                          textEditingController:
-                                              _passwordController,
-                                          enabled: state is! LoginLoading,
-                                          keyboardType:
-                                              TextInputType.visiblePassword,
-                                          textInputAction: TextInputAction.done,
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Required field';
-                                            } else if (value.length < 6) {
-                                              return 'Password must be longer than 6 characters';
-                                            }
-                                            return null;
-                                          },
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
-                                          suffixIcon: InkWell(
-                                            onTap: () {
+                                  Text(
+                                    'Email',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    height: 5.h,
+                                  ),
+                                  EventoTextField(
+                                    hint: 'Enter email',
+                                    textEditingController: _emailController,
+                                    enabled: state is! LoginLoading,
+                                    keyboardType: TextInputType.emailAddress,
+                                    textInputAction: TextInputAction.next,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Required field';
+                                      } else if (!isEmailValid(value)) {
+                                        return 'Incorrect Email Address';
+                                      }
+                                      return null;
+                                    },
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                  ),
+                                  SizedBox(
+                                    height: 20.h,
+                                  ),
+                                  Text(
+                                    'Password',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    height: 5.h,
+                                  ),
+                                  EventoTextField(
+                                    hint: 'Password',
+                                    textEditingController: _passwordController,
+                                    enabled: state is! LoginLoading,
+                                    keyboardType: TextInputType.visiblePassword,
+                                    textInputAction: TextInputAction.done,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Required field';
+                                      } else if (value.length < 6) {
+                                        return 'Password must be longer than 6 characters';
+                                      }
+                                      return null;
+                                    },
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    suffixIcon: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          _isObscuredPassword =
+                                              !_isObscuredPassword;
+                                        });
+                                      },
+                                      child: Icon(_isObscuredPassword
+                                          ? Icons.visibility_off_outlined
+                                          : Icons.visibility_outlined),
+                                    ),
+                                    obscureText: _isObscuredPassword,
+                                    maxLines: 1,
+                                  ),
+                                  SizedBox(
+                                    height: 5.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Checkbox(
+                                            value: _isRemeberMeChecked,
+                                            onChanged: (value) {
                                               setState(() {
-                                                _isObscuredPassword =
-                                                    !_isObscuredPassword;
+                                                _isRemeberMeChecked =
+                                                    !_isRemeberMeChecked;
                                               });
                                             },
-                                            child: Icon(_isObscuredPassword
-                                                ? Icons.visibility_off_outlined
-                                                : Icons.visibility_outlined),
                                           ),
-                                          obscureText: _isObscuredPassword,
-                                          maxLines: 1,
-                                        ),
-                                        SizedBox(
-                                          height: 5.h,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Checkbox(
-                                                  value: _isRemeberMeChecked,
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      _isRemeberMeChecked =
-                                                          !_isRemeberMeChecked;
-                                                    });
-                                                  },
-                                                ),
-                                                Text('Remember me',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyLarge),
-                                              ],
-                                            ),
-                                            Text(
-                                              'Forgot password?',
+                                          Text('Remember me',
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyLarge
-                                                  ?.copyWith(
-                                                      color: AppColor
-                                                          .primaryColor),
+                                                  .bodyLarge),
+                                        ],
+                                      ),
+                                      InkWell(
+                                        onTap: _showForgotPasswordModal,
+                                        child: Text(
+                                          'Forgot password?',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.copyWith(
+                                                  color: AppColor.primaryColor),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 50.h,
+                                  ),
+                                  ButtonWidget(
+                                    onPressed:
+                                        state is LoginLoading ? null : _login,
+                                    child: state is LoginLoading
+                                        ? SizedBox(
+                                            height: 24.h,
+                                            width: 24.w,
+                                            child: CircularProgressIndicator(
+                                              color: Colors.white,
+                                              strokeWidth: 2.w,
                                             ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 50.h,
-                                        ),
-                                        ButtonWidget(
-                                          onPressed: state is LoginLoading
-                                              ? null
-                                              : _login,
-                                          child: state is LoginLoading
-                                              ? SizedBox(
-                                                  height: 24.h,
-                                                  width: 24.w,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    color: Colors.white,
-                                                    strokeWidth: 2.w,
-                                                  ),
-                                                )
-                                              : Text(
-                                                  'Continue',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge
-                                                      ?.copyWith(
-                                                          color: Colors.white),
-                                                ),
-                                        ),
-                                        SizedBox(
-                                          height: 30.h,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          )
+                                        : Text(
+                                            'Continue',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.copyWith(color: Colors.white),
+                                          ),
+                                  ),
+                                  SizedBox(
+                                    height: 30.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      RichText(
+                                        textAlign: TextAlign.center,
+                                        text: TextSpan(
+                                          text: 'Don\'t have an account? ',
+                                          style: textTheme.bodyLarge,
                                           children: [
-                                            RichText(
-                                              textAlign: TextAlign.center,
-                                              text: TextSpan(
-                                                text:
-                                                    'Don\'t have an account? ',
-                                                style: textTheme.bodyLarge,
-                                                children: [
-                                                  TextSpan(
-                                                      text: 'Sign up',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyLarge
-                                                          ?.copyWith(
-                                                              color: AppColor
-                                                                  .primaryColor),
-                                                      recognizer:
-                                                          TapGestureRecognizer()
-                                                            ..onTap = () => context
-                                                                .pushReplacement(
-                                                                    SignUpScreen
-                                                                        .path)),
-                                                ],
-                                              ),
-                                            ),
+                                            TextSpan(
+                                                text: 'Sign up',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyLarge
+                                                    ?.copyWith(
+                                                        color: AppColor
+                                                            .primaryColor),
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () => context
+                                                          .pushReplacement(
+                                                              SignUpScreen
+                                                                  .path)),
                                           ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   )
                                 ],
                               ),
@@ -374,5 +366,138 @@ class _LoginScreenState extends State<LoginScreen> {
       authBloc
           .add(LoginUserEvent(_emailController.text, _passwordController.text));
     }
+  }
+
+  Future<void> _forgotPassword(String email) async {
+    authBloc.add(ForgotPasswordEvent(email));
+  }
+
+  _showForgotPasswordModal() {
+    final textTheme = Theme.of(context).textTheme;
+    final emailController = TextEditingController();
+    final formKey = GlobalKey<FormState>();
+    showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
+      builder: (context) {
+        return Scaffold(
+          backgroundColor: Colors.transparent,
+          resizeToAvoidBottomInset: true,
+          body: BlocListener<AuthBloc, AuthState>(
+            bloc: authBloc,
+            listener: (context, state) {
+              if (state is ForgotPasswordFailed) {
+                showEventoErrorDialog(context, state.error);
+              } else if (state is ForgotPasswordSuccess) {
+                showEventoSuccessDialog(context, state.message);
+              }
+            },
+            child: BlocBuilder<AuthBloc, AuthState>(
+                bloc: authBloc,
+                builder: (context, state) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 30.0, horizontal: 20),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              InkWell(
+                                onTap: () => Navigator.pop(context),
+                                child: const Icon(Icons.cancel_outlined),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12.0),
+                          Text(
+                            'Forgot your password?',
+                            style: textTheme.displayLarge
+                                ?.copyWith(color: Colors.black),
+                          ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          Text(
+                            'Enter your registered Email address to receive reset instructions.',
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: Colors.black,
+                              overflow: TextOverflow.clip,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          Text(
+                            'Email',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Form(
+                            key: formKey,
+                            child: EventoTextField(
+                              hint: 'Enter email address',
+                              textEditingController: emailController,
+                              enabled: state is! LoginLoading,
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.done,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Required field';
+                                } else if (!isEmailValid(value)) {
+                                  return 'Incorrect Email Address';
+                                }
+                                return null;
+                              },
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 50.h,
+                          ),
+                          ButtonWidget(
+                            onPressed: state is ForgotPasswordLoading
+                                ? null
+                                : () {
+                                    if (formKey.currentState!.validate()) {
+                                      _forgotPassword(emailController.text);
+                                    }
+                                  },
+                            child: state is ForgotPasswordLoading
+                                ? SizedBox(
+                                    height: 24.h,
+                                    width: 24.w,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 2.w,
+                                    ),
+                                  )
+                                : Text(
+                                    'Send recovery instructions',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(color: Colors.white),
+                                  ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+          ),
+        );
+      },
+    );
   }
 }

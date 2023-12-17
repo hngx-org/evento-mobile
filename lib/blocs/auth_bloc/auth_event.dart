@@ -23,3 +23,11 @@ class RegisterUserEvent extends AuthEvent {
   const RegisterUserEvent(
       this.email, this.password, this.firstName, this.lastName);
 }
+
+class ForgotPasswordEvent extends AuthEvent {
+  final String email;
+
+  const ForgotPasswordEvent(
+    this.email,
+  );
+}
