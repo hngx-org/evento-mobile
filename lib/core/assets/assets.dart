@@ -22,9 +22,10 @@ class Assets {
   static const String searchIcon = "$svgPath/search.svg";
   static const String settings1Icon = "$svgPath/setting.svg";
   static const String settings2Icon = "$svgPath/setting-2.svg";
-  static const String successImage = "$svgPath/siccess.svg";
+  static const String successImage = "$svgPath/success.svg";
   static const String usereditIcon = "$svgPath/user-edit.svg";
   static const String waveImage = "$svgPath/wave.svg";
+  static const String errorImage = '$svgPath/error.svg';
 
   static const String eventImage = "$pngPath/meeting.png";
   static const String peopleImage1 = "$pngPath/people1.png";
