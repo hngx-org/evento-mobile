@@ -10,6 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../navScreen.dart';
+
 class LoginScreen extends StatefulWidget {
   static const String name = 'login-screen';
   static const String path = '/login-screen';
@@ -261,7 +263,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: 50.h,
                                 ),
                                 ButtonWidget(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.push(NavScreen.path);
+                                  },
                                   child: Text(
                                     'Continue',
                                     style: Theme.of(context)
