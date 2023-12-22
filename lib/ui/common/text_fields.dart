@@ -22,6 +22,7 @@ class EventoTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String? errorText;
   final String? helperText;
+  final Color? color;
   final void Function()? onClickSuffixIcon;
   final bool obscureText;
 
@@ -46,6 +47,7 @@ class EventoTextField extends StatelessWidget {
     this.errorText,
     this.helperText,
     this.onClickSuffixIcon,
+    this.color,
     super.key,
     this.obscureText = false,
   });
@@ -64,6 +66,8 @@ class EventoTextField extends StatelessWidget {
       enabled: enabled,
       decoration: InputDecoration(
         hintText: hint,
+        filled: true,
+        fillColor: color ?? Colors.white,
         prefixText: prefixText,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.r)),
@@ -79,8 +83,7 @@ class EventoTextField extends StatelessWidget {
         border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.r)),
             borderSide: BorderSide(width: 1.w)),
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+        contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 46.0),
         hintStyle: Theme.of(context)
             .textTheme
             .bodyMedium
@@ -92,7 +95,18 @@ class EventoTextField extends StatelessWidget {
               )
             : null,
         suffix: suffix,
-        prefixIcon: prefixIcon,
+        // prefixIcon: prefixIcon,
+        prefixIcon: prefixIcon != null
+            ? Padding(
+                padding: const EdgeInsets.fromLTRB(
+                    8, 0, 8, 0), // Adjust the left padding
+                child: prefixIcon,
+              )
+            : null,
+        prefixIconConstraints: BoxConstraints(
+          minWidth: 24.w,
+          minHeight: 24.h,
+        ),
         errorText: errorText,
         helperText: helperText,
       ),
