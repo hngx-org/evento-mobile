@@ -10,8 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-
+import '../../../navScreen.dart';
 import '../../../blocs/auth_bloc/auth_bloc.dart';
+
 
 class LoginScreen extends StatefulWidget {
   static const String name2 = 'login-screen';
@@ -146,6 +147,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ],
                                     ),
+                                    Text(
+                                      'Forgot password?',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                              color: AppColor.primaryColor),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 50.h,
+                                ),
+                                ButtonWidget(
+                                  onPressed: () {
+                                    context.push(NavScreen.path);
+                                  },
+                                  child: Text(
+                                    'Continue',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(color: Colors.white),
+
                                   ),
                                   SizedBox(
                                     height: 30.h,
