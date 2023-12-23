@@ -1,4 +1,5 @@
-import 'package:evento/navScreen.dart';
+import 'package:evento/ui/screens/explore/recommended.dart';
+import 'package:evento/ui/screens/home/nav_screen.dart';
 import 'package:evento/ui/screens/auth/login_screen.dart';
 import 'package:evento/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -58,7 +59,15 @@ final routes = GoRouter(
       name: NavScreen.name,
       path: NavScreen.path,
       pageBuilder: (BuildContext context, GoRouterState state) => CupertinoPage(
-        child: NavScreen(),
+        child: const NavScreen(),
+        key: state.pageKey,
+      ),
+    ),
+    GoRoute(
+      name: RecommendedPage.name,
+      path: RecommendedPage.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => CupertinoPage(
+        child: const RecommendedPage(),
         key: state.pageKey,
       ),
     ),

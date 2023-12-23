@@ -6,8 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FilterBottomSheet extends StatefulWidget {
+  const FilterBottomSheet({super.key});
+
   @override
-  _FilterBottomSheetState createState() => _FilterBottomSheetState();
+  State<FilterBottomSheet> createState() => _FilterBottomSheetState();
 }
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
@@ -16,68 +18,80 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.sizeOf(context);
     final textTheme = Theme.of(context).textTheme;
 
-    return SingleChildScrollView(
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.8,
-        color: Colors.white,
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Filter',
-              style: textTheme.displayLarge?.copyWith(
-                fontWeight: FontWeight.bold,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.r),
+                topRight: Radius.circular(20.r),
               ),
             ),
-            const SizedBox(height: 16),
-            _buildCategorySection(),
-            const SizedBox(height: 16),
-            _buildDateSection(),
-            const SizedBox(height: 16),
-            EventoTextField(
-              hint: 'Select date',
-              prefixIcon: SvgPicture.asset(Assets.calendarIcon),
-              suffixIcon: SvgPicture.asset(
-                Assets.arrowRightIcon,
-                color: AppColor.primaryColor,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Filter',
+                style: textTheme.displayLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              onClickSuffixIcon: _showCalendar,
-            ),
-            const SizedBox(height: 16),
-            _buildLocationSection(),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 100,
-                  child: ElevatedButton(
-                    onPressed: _resetFilter,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      side: BorderSide(color: AppColor.primaryColor),
-                    ),
-                    child: Text(
-                      'Reset',
-                      style: TextStyle(color: AppColor.primaryColor),
+              const SizedBox(height: 16),
+              _buildCategorySection(),
+              const SizedBox(height: 16),
+              _buildDateSection(),
+              const SizedBox(height: 16),
+              EventoTextField(
+                hint: 'Select date',
+                prefixIcon: SvgPicture.asset(Assets.calendarIcon),
+                suffixIcon: SvgPicture.asset(
+                  Assets.arrowRightIcon,
+                  colorFilter:
+                      ColorFilter.mode(AppColor.primaryColor, BlendMode.srcIn),
+                ),
+                onClickSuffixIcon: _showCalendar,
+              ),
+              const SizedBox(height: 16),
+              _buildLocationSection(),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: ElevatedButton(
+                      onPressed: _resetFilter,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        side: BorderSide(color: AppColor.primaryColor),
+                      ),
+                      child: Text(
+                        'Reset',
+                        style: textTheme.bodyLarge
+                            ?.copyWith(color: AppColor.primaryColor),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 20),
-                SizedBox(
-                  width: 100,
-                  child: ElevatedButton(
-                    onPressed: _applyFilter,
-                    child: const Text('Apply'),
+                  const SizedBox(width: 20),
+                  SizedBox(
+                    width: 100,
+                    child: ElevatedButton(
+                      onPressed: _applyFilter,
+                      child: const Text('Apply'),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -109,7 +123,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
 
   Widget _buildCategoryItem(String title, int index) {
     bool isSelected = index == _selectedCategoryIndex;
-
+    final textTheme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -132,7 +146,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           child: Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: textTheme.bodyLarge?.copyWith(
               color: isSelected ? Colors.white : Colors.grey,
             ),
           ),
@@ -167,7 +181,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
 
   Widget _buildDateItem(String title, int index) {
     bool isSelected = index == _selectedDateIndex;
-
+    final textTheme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -190,7 +204,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           child: Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: textTheme.bodyLarge?.copyWith(
               color: isSelected ? Colors.white : Colors.grey,
             ),
           ),
@@ -214,11 +228,13 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           hint: 'Enter location',
           prefixIcon: SvgPicture.asset(
             Assets.locationIcon,
-            color: AppColor.primaryColor,
+            colorFilter:
+                ColorFilter.mode(AppColor.primaryColor, BlendMode.srcIn),
           ),
           suffixIcon: SvgPicture.asset(
             Assets.arrowRightIcon,
-            color: AppColor.primaryColor,
+            colorFilter:
+                ColorFilter.mode(AppColor.primaryColor, BlendMode.srcIn),
           ),
         ),
       ],

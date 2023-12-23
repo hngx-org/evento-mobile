@@ -28,11 +28,18 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'Evento',
-                style: GoogleFonts.chelseaMarket(
-                  fontSize: 42.sp,
-                  color: Colors.white,
+              Container(
+                alignment: Alignment.center,
+                height: 200.h,
+                width: 200.w,
+                decoration: const ShapeDecoration(
+                    shape: CircleBorder(), color: Colors.white),
+                child: Text(
+                  'Evento',
+                  style: GoogleFonts.chelseaMarket(
+                    fontSize: 32.sp,
+                    color: AppColor.primaryColor,
+                  ),
                 ),
               ),
             ],

@@ -10,9 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import '../../../navScreen.dart';
+import '../home/nav_screen.dart';
 import '../../../blocs/auth_bloc/auth_bloc.dart';
-
 
 class LoginScreen extends StatefulWidget {
   static const String name2 = 'login-screen';
@@ -117,61 +116,38 @@ class _LoginScreenState extends State<LoginScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Container(
-                                    alignment: Alignment.center,
-                                    height: 50.h,
-                                    width: double.infinity,
-                                    decoration: ShapeDecoration(
-                                      color: const Color(0xFFFEFEFE),
-                                      shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                            width: 1, color: Color(0xFFC0C0C0)),
-                                        borderRadius: BorderRadius.circular(8),
+                                      alignment: Alignment.center,
+                                      height: 50.h,
+                                      width: double.infinity,
+                                      decoration: ShapeDecoration(
+                                        color: const Color(0xFFFEFEFE),
+                                        shape: RoundedRectangleBorder(
+                                          side: const BorderSide(
+                                              width: 1,
+                                              color: Color(0xFFC0C0C0)),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
                                       ),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(
-                                          Assets.googleIcon,
-                                          height: 32.h,
-                                          width: 32.w,
-                                        ),
-                                        SizedBox(width: 8.w),
-                                        Text(
-                                          'Sign in with Google',
-                                          style: textTheme.bodyLarge,
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      'Forgot password?',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(
-                                              color: AppColor.primaryColor),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 50.h,
-                                ),
-                                ButtonWidget(
-                                  onPressed: () {
-                                    context.push(NavScreen.path);
-                                  },
-                                  child: Text(
-                                    'Continue',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(color: Colors.white),
-
-                                  ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            Assets.googleIcon,
+                                            height: 32.h,
+                                            width: 32.w,
+                                          ),
+                                          SizedBox(width: 8.w),
+                                          Text(
+                                            'Sign in with Google',
+                                            style: textTheme.bodyLarge,
+                                          ),
+                                        ],
+                                      )),
                                   SizedBox(
                                     height: 30.h,
                                   ),
@@ -387,10 +363,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _login() async {
-    if (_formKey.currentState!.validate()) {
-      authBloc
-          .add(LoginUserEvent(_emailController.text, _passwordController.text));
-    }
+    // if (_formKey.currentState!.validate()) {
+    //   authBloc
+    //       .add(LoginUserEvent(_emailController.text, _passwordController.text));
+    // }
+    context.push(NavScreen.path);
   }
 
   Future<void> _forgotPassword(String email) async {
