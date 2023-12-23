@@ -1,4 +1,4 @@
-package com.example.evento
+package com.evento.app
 
 import io.flutter.embedding.android.FlutterActivity
 

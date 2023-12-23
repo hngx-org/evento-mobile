@@ -2,16 +2,18 @@ import 'package:evento/ui/screens/explore/explore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'core/assets/assets.dart';
-import 'ui/common/colors.dart';
-import 'ui/screens/auth/login_screen.dart';
+import '../../../core/assets/assets.dart';
+import '../../common/colors.dart';
+import '../auth/login_screen.dart';
 
 class NavScreen extends StatefulWidget {
   static const String name = 'nav-screen';
   static const String path = '/nav-screen';
 
+  const NavScreen({super.key});
+
   @override
-  _NavScreenState createState() => _NavScreenState();
+  State<NavScreen> createState() => _NavScreenState();
 }
 
 class _NavScreenState extends State<NavScreen> {

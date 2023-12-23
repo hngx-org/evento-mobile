@@ -42,3 +42,19 @@ final class RegisterFailed extends AuthState {
   @override
   String toString() => 'RegisterFailed { error: $error }';
 }
+
+final class ForgotPasswordLoading extends AuthState {}
+
+final class ForgotPasswordSuccess extends AuthState {
+  final String message;
+  const ForgotPasswordSuccess(this.message);
+}
+
+final class ForgotPasswordFailed extends AuthState {
+  final String error;
+
+  const ForgotPasswordFailed({required this.error});
+
+  @override
+  String toString() => 'ForgotPasswordFailed { error: $error }';
+}

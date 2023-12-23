@@ -36,24 +36,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final mediaQuery = MediaQuery.sizeOf(context);
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: BlocListener<AuthBloc, AuthState>(
-          bloc: authBloc,
-          listener: (context, state) async {
-            if (state is RegisterFailed) {
-              showEventoErrorDialog(context, state.error);
-            } else if (state is RegisterSuccess) {
-              await showEventoSuccessDialog(context, state.message);
-              if (context.mounted) {
-                context.pushReplacement(LoginScreen.path);
-              }
+      body: BlocListener<AuthBloc, AuthState>(
+        bloc: authBloc,
+        listener: (context, state) async {
+          if (state is RegisterFailed) {
+            showEventoErrorDialog(context, state.error);
+          } else if (state is RegisterSuccess) {
+            await showEventoSuccessDialog(context, state.message);
+            if (context.mounted) {
+              context.pushReplacement(LoginScreen.path);
             }
-          },
-          child: BlocBuilder<AuthBloc, AuthState>(
-              bloc: authBloc,
-              builder: (context, state) {
-                return SizedBox(
-                  height: mediaQuery.height + 50,
+          }
+        },
+        child: BlocBuilder<AuthBloc, AuthState>(
+            bloc: authBloc,
+            builder: (context, state) {
+              return SingleChildScrollView(
+                child: SizedBox(
+                  height: mediaQuery.height + 100,
                   width: mediaQuery.width,
                   child: Stack(
                     children: [
@@ -329,7 +329,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           ),
                                   ),
                                   SizedBox(
-                                    height: 25.h,
+                                    height: 30.h,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -367,9 +367,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       )
                     ],
                   ),
-                );
-              }),
-        ),
+                ),
+              );
+            }),
       ),
     );
   }

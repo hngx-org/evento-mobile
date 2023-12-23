@@ -33,6 +33,14 @@ class AuthRepository {
     }
     return token;
   }
+
+  Future<void> forgotPassword(String email) async {
+    final registerResponse = await AuthService().forgotPassword(email);
+    final hasError = !registerResponse;
+    if (hasError) {
+      throw AuthRepositoryException('An unknown error occurred');
+    }
+  }
 }
 
 class AuthRepositoryException implements Exception {

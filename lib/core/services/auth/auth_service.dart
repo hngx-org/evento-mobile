@@ -55,6 +55,29 @@ class AuthService {
     }
     return message;
   }
+
+  Future<bool> forgotPassword(String email) async {
+    final requestUrl = Uri.https(Env.baseUrl, 'api/v1/reset-password');
+
+    final requestBody = jsonEncode({
+      "email": email,
+    });
+
+    final response = await http.post(requestUrl,
+        body: requestBody, headers: {'Content-Type': 'application/json'});
+    print(response.statusCode);
+    print(response.body);
+    final responseBody = jsonDecode(response.body);
+    final registerResponse = RegisterResponse.fromJson(responseBody);
+
+    final success = registerResponse.success ?? false;
+    final message = registerResponse.message ?? '';
+
+    if (!success) {
+      throw AuthServiceException(message);
+    }
+    return success;
+  }
 }
 
 class AuthServiceException implements Exception {

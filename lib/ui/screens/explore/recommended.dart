@@ -8,6 +8,10 @@ import '../../common/colors.dart';
 import '../../common/text_fields.dart';
 
 class RecommendedPage extends StatefulWidget {
+  static const String name = 'recommended-screen';
+  static const String path = '/recommended-screen';
+  const RecommendedPage({super.key});
+
   @override
   State<RecommendedPage> createState() => _RecommendedPageState();
 }
@@ -30,7 +34,7 @@ class _RecommendedPageState extends State<RecommendedPage> {
       ),
       Event(
         title: 'Tech Conference 2023',
-        date: DateTime.now().add(Duration(days: 2)),
+        date: DateTime.now().add(const Duration(days: 2)),
         price: 15.0,
         location: 'Event Location 2',
       ),
@@ -84,7 +88,7 @@ class _RecommendedPageState extends State<RecommendedPage> {
             ),
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: events.length,
               itemBuilder: (context, index) {
                 Event event = events[index];
@@ -104,7 +108,7 @@ class _RecommendedPageState extends State<RecommendedPage> {
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.r),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage(Assets.eventImage),
                             fit: BoxFit.cover,
                           ),
@@ -125,16 +129,19 @@ class _RecommendedPageState extends State<RecommendedPage> {
                             SizedBox(height: 8.h),
                             Text(
                               event.location,
-                              style: TextStyle(fontSize: 14.sp),
+                              style: textTheme.bodyLarge
+                                  ?.copyWith(fontSize: 14.sp),
                             ),
                             SizedBox(height: 8.h),
                             Row(
                               children: [
-                                Icon(Icons.access_time, color: Colors.blue),
+                                const Icon(Icons.access_time,
+                                    color: Colors.blue),
                                 SizedBox(width: 8.w),
                                 Text(
                                   formattedTime,
-                                  style: TextStyle(fontSize: 14.sp),
+                                  style: textTheme.bodyLarge
+                                      ?.copyWith(fontSize: 14.sp),
                                 ),
                               ],
                             ),
@@ -154,6 +161,7 @@ class _RecommendedPageState extends State<RecommendedPage> {
   }
 
   Widget buildCategoryItem(String title, int index) {
+    final textTheme = Theme.of(context).textTheme;
     bool isSelected = index == _selectedCategoryIndex;
 
     return GestureDetector(
@@ -171,14 +179,14 @@ class _RecommendedPageState extends State<RecommendedPage> {
           decoration: ShapeDecoration(
             color: isSelected ? AppColor.primaryColor : Colors.transparent,
             shape: RoundedRectangleBorder(
-              side: BorderSide(width: 1, color: Color(0xFFF2BB9B)),
+              side: const BorderSide(width: 1, color: Color(0xFFF2BB9B)),
               borderRadius: BorderRadius.circular(30),
             ),
           ),
           child: Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: textTheme.bodyLarge?.copyWith(
               color: isSelected ? Colors.white : Colors.black,
             ),
           ),
