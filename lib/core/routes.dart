@@ -1,3 +1,4 @@
+import 'package:evento/ui/profile/profile.dart';
 import 'package:evento/ui/screens/explore/recommended.dart';
 import 'package:evento/ui/screens/home/nav_screen.dart';
 import 'package:evento/ui/screens/auth/login_screen.dart';
@@ -68,6 +69,14 @@ final routes = GoRouter(
       path: RecommendedPage.path,
       pageBuilder: (BuildContext context, GoRouterState state) => CupertinoPage(
         child: const RecommendedPage(),
+        key: state.pageKey,
+      ),
+    ),
+    GoRoute(
+      name: ProfileScreen.name,
+      path: ProfileScreen.path,
+      pageBuilder: (BuildContext context, GoRouterState state) => CupertinoPage(
+        child: const ProfileScreen(),
         key: state.pageKey,
       ),
     ),

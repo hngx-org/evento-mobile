@@ -26,6 +26,11 @@ class Assets {
   static const String usereditIcon = "$svgPath/user-edit.svg";
   static const String waveImage = "$svgPath/wave.svg";
   static const String errorImage = '$svgPath/error.svg';
+  static const String facebookIcon = '$svgPath/facebook.svg';
+  static const String instagramIcon = '$svgPath/instagram.svg';
+  static const String twitterIcon = '$svgPath/twitter.svg';
+  static const String noEventIcon = '$svgPath/eventt.svg';
+  static const String editIcon = '$svgPath/edit.svg';
 
   static const String eventImage = "$pngPath/meeting.png";
   static const String peopleImage1 = "$pngPath/people1.png";

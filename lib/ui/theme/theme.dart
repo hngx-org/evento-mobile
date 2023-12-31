@@ -27,6 +27,7 @@ final ThemeData LightTheme = ThemeData(
   primarySwatch: _createMaterialColor(Color(0xFFE0580C)),
   primaryColor: Color(0xFFE0580C),
   brightness: Brightness.light,
+  /// text theme
   textTheme: TextTheme(
     displayLarge: GoogleFonts.montserrat(
       color: Color(0xFF3C3C3C),
